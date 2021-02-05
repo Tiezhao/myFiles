@@ -1,0 +1,208 @@
+教程 Git 
+
+(提交)
+status，add，commit，master，pull，merge，：wq，tcl，merge。
+
+git是先进的分布式版本控制系统
+命令行输入git,会提示安装命令
+git clone
+克隆项目到本地
+后面跟项目地址,如:git clone https://git.zhuozhuo.io/zhuozhuo/RD.git
+git branch dev
+新开分支,dev是新分支名字
+git checkout dev
+切换到分支dev
+git checkout -b dev
+新建分支dev并切换到新分支
+git push origin dev
+提交新分支到远程
+git status
+查看项目状态,安装kmgGit后使用kmg gitstatus
+git add fileName
+将修改添加到仓库, fileName为需要添加的文件名,使用git add .表示所有修改都添加
+git commit -m"description"
+将修改提交到仓库,description为本次提交的描述
+git push
+将仓库的内容提交到远程
+安装kmgGit后使用kmg gitpush整合git add,git commit, git piush 这三个命令
+git pull
+拉取远程修改,安装kmgGit后使用kmg gitpull
+git log
+查看git历史版本log,会显示log的id,描述,提交时间,提交人
+git diff logId
+比较当前版本与历史版本区别, logId为 git log 命令查出来的log的id,不需要输入完整,只需要输入前几位就可以
+submodule
+submodule是在一个git项目里面引用其他的git项目,引用的项目为子项目
+git submodule add
+后面跟子项目地址,在git项目里面对应目录下执行,将子项目克隆到当前目录下,
+git submodule update
+克隆一个含有子项目的项目:
+git clone 项目 https 地址
+git submodule init
+git submodule update
+克隆项目(同时拉取submodule中的内容,效果和上面3个命令一样):git clone --recursive
+在 idea 里面使用 git 的时候，对于不需要加入版本控制的目录或文件：
+需要在项目根目录下创建 .gitignore 文件
+根据提示安装插件
+在 .gitignore 中加入不需要加入版本控制的目录或文件 （一定要把.idea目录加进去，否则多人开发会冲突）
+生效后，对应的文件或目录会变灰
+参考文档
+
+http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000
+
+
+
+
+pwd 命令是用于显示当前的目录
+
+ll命令使用于显示包含文件的total数量
+
+cd ~命令用于回到home目录
+
+命令 git init 把这个目录变成git可以管理的仓库
+
+git add 文件名 将该文件添加到暂存区里
+
+git commit -m "注释" 把文件提交到仓库里
+ 
+git status 查看当前状态：查看是否还有文件未提交（注意经常查看）
+
+git diff 文件名 查看文件的不同之处（当命令行提示有changes ...  commit）
+
+cat 文件名 读取文件里的内容
+
+git log 查看历史记录（可以看见最近的三次提交）
+
+git log --pretty=oneline(可以更简洁的显示历史记录)
+
+git reset --hard HEAD^(返回上一个版本)
+
+git reset --hard HEAD^^(返回上上一个版本)--以此类推
+
+git reset --hard HEAD~100（返回前100个版本）
+
+git reflog 获取版本号
+
+git reset --hard 6fcfc89 返回到6fcfc89版本，可以返回到指定的版本
+
+工作区：就是你在电脑上看到的目录，比如目录下testgit里的文件(.git隐藏目录版本库除外)。
+或者以后需要再新建的目录文件等等都属于工作区范畴。
+
+版本库(Repository)：工作区有一个隐藏目录.git,这个不属于工作区，这是版本库。
+其中版本库里面存了很多东西，其中最重要的就是stage(暂存区)，
+还有Git为我们自动创建了第一个分支master,以及指向master的一个指针HEAD。
+
+Git提交文件到版本库有两步：
+
+第一步：是使用 git add 把文件添加进去，实际上就是把文件添加到暂存区。
+
+第二步：使用git commit提交更改，实际上就是把暂存区的所有内容提交到当前分支上。
+
+git checkout -- 文件名 将该文件在工作区做的修改全部撤销，还可以将该已删除文件还原
+
+git ls-files --deleted 查看删除文件
+
+rm 文件名 删除该文件
+
+git branch 查看分支
+
+git branch name 创建分支
+
+git checkout name 切换分支
+
+git checkout –b name 创建+切换分支
+
+git merge name 合并某分支到当前分支
+
+git branch –d name 删除分支
+
+产生冲突
+Git用<<<<<<<，=======，>>>>>>>标记出不同分支的内容，其中<<<HEAD是指主分支修改的内容
+>>>>>>>分支名 是指该分支上修改的内容
+将冲突的部分修改后，再commit
+一般在合并分支的时候产生冲突，冲突解决后，再提交
+
+git stash 将当前的工作现场隐藏起来
+git stash list 显示工作现场
+git stash apply恢复工作现场，恢复后，stash内容并不删除，你需要使用命令git stash drop来删除。
+git stash pop,恢复的同时把stash内容也删除了。
+
+忽略文件
+在仓库目录下新建一个名为.gitignore的文件（因为是点开头，没有文件名，
+没办法直接在windows目录下直接创建，必须通过右键Git Bash，
+按照Linux的方式来新建.gitignore文件）。
+再将忽略的文件名写入.gitignore中
+最后再将.gitignore文件添加到仓库中，其他开发者更新该文件到本地仓库，以共享同一套忽略规则。
+
+git push origin master 的意思是 git push origin master:master （将本地的 master 分支推送至远端的 master 分支，如果没有就新建一个）
+
+综合一下命令：
+
+Git基本常用命令如下：
+
+   mkdir：         XX (创建一个空目录 XX指目录名)
+
+   pwd：          显示当前目录的路径。
+
+   git init          把当前的目录变成可以管理的git仓库，生成隐藏.git文件。
+
+   git add XX       把xx文件添加到暂存区去。
+
+   git commit –m “XX”  提交文件 –m 后面的是注释。
+
+   git status        查看仓库状态
+
+   git diff  XX      查看XX文件修改了那些内容
+
+   git log          查看历史记录
+
+   git reset  –hard HEAD^ 或者 git reset  –hard HEAD~ 回退到上一个版本
+
+                        (如果想回退到100个版本，使用git reset –hard HEAD~100 )
+
+   cat XX         查看XX文件内容
+
+   git reflog       查看历史记录的版本号id
+
+   git checkout — XX  把XX文件在工作区的修改全部撤销。
+
+   git rm XX          删除XX文件
+
+   git remote add origin https://github.com/tugenhua0707/testgit 关联一个远程库
+
+   git push –u(第一次要用-u 以后不需要) origin master 把当前master分支推送到远程库
+
+   git clone https://github.com/tugenhua0707/testgit  从远程库中克隆
+
+   git checkout –b dev  创建dev分支 并切换到dev分支上
+
+   git branch  查看当前所有的分支
+
+   git checkout master 切换回master分支
+
+   git merge dev    在当前的分支上合并dev分支
+
+   git branch –d dev 删除dev分支
+
+   git branch name  创建分支
+
+   git stash 把当前的工作隐藏起来 等以后恢复现场后继续工作
+
+   git stash list 查看所有被隐藏的文件列表
+
+   git stash apply 恢复被隐藏的文件，但是内容不删除
+
+   git stash drop 删除文件
+
+   git stash pop 恢复文件的同时 也删除文件
+
+   git remote 查看远程库的信息
+
+   git remote –v 查看远程库的详细信息
+
+   git push origin master  Git会把master分支推送到远程库对应的远程分支上
+
+git强制覆盖本地
+git fetch --all  
+git reset --hard origin/master 
+git pull
